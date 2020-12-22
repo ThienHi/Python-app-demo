@@ -1,0 +1,25 @@
+{% extends 'menus/home.html' %}
+{% block create %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="{% url 'menu:save' %}" method="post">
+        {% csrf_token %}
+        <h4>Url video</h4>
+        {{v.url}}
+        <h4>Image</h4>{{v.image}}
+        <h4>Content</h4>
+        {{v.content}}
+        <h4>Creator</h4>
+        {{v.creator}}
+        <br>
+        <button type="submit">Create Video</button>
+    </form>
+</body>
+</html>
+{% endblock %}

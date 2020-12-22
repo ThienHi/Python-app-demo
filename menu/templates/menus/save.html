@@ -1,0 +1,31 @@
+{% extends 'menus/home.html' %}
+{% block list %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save Video</title>
+</head>
+<body>
+    <div class="listvideo">
+        {% if video %}
+        {% for item in video%}
+            <a class="listvideo-a" href="{{item.url}}">
+                <form class="listvideo-form">
+                    <div class="img">
+                        <img class="listvideo-img" src="{{item.image}}" />
+                    </div>
+                    <div class="listvideo-content">
+                        <h3>{{item.content}}</h3>
+                        <p>{{item.creator}}</p>
+                    </div>
+                </form>
+            </a>
+            <br>
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>
+{% endblock %}
