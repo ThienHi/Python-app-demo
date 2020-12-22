@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .forms import ListVideoForm
 from .models import ListVideo
 
@@ -21,8 +21,8 @@ def save(request):
         v = ListVideoForm(request.POST)
         if v.is_valid():
             v.save()
-            video = ListVideo.objects.all()
-            return render(request, 'menus/save.html', {"video": video})
+            # video = ListVideo.objects.all()
+            return HttpResponseRedirect('/home/')
         else:
             return HttpResponse("Save False")
     else:
