@@ -6,8 +6,8 @@
     <title>Login</title>
 </head>
 <body>
-    <div class="container" >
-        <form class="login" action="" method="post">
+    <!-- <div class="container" > -->
+        <form class="login" method="POST">
             {% csrf_token %}
             <h3>Username:</h3>
             <input type="text" name="username"> 
@@ -16,6 +16,6 @@
             <br>
             <input type="submit" value="Login">
         </form>
-    </div>
+    <!-- </div> -->
 </body>
 </html>
