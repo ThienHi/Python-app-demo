@@ -26,7 +26,7 @@ SECRET_KEY = '8wvs(1$)9n-39@chm_*c3p^&193@n*)%xt6k)yks_^zfd!_nei'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -128,17 +128,17 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-###----------SENTRY-------------------
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
+# ###----------SENTRY-------------------
+# import sentry_sdk
+# from sentry_sdk.integrations.django import DjangoIntegration
 
-sentry_sdk.init(
-    dsn="http://8b30238dc0be4d108493733b037ea68a@172.27.228.224:9000/11",
-    integrations=[DjangoIntegration()],
+# sentry_sdk.init(
+#     dsn="http://8b30238dc0be4d108493733b037ea68a@172.27.228.224:9000/11",
+#     integrations=[DjangoIntegration()],
     
-    traces_sample_rate=1.0,
+#     traces_sample_rate=1.0,
 
-    send_default_pii=True
-)
+#     send_default_pii=True
+# )
 
-###---------------------------------------
+# ###---------------------------------------
