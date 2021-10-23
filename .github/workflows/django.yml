@@ -13,7 +13,6 @@ jobs:
           - 5432:5432
         env:
           POSTGRES_PASSWORD: 7bf262014b72ca4b73ee588d0fef98399ff2347e3a82565923ed605ae9e949fd
-
     env:
       # postgres://user:password@host:port/database
       DATABASE_URL: "postgres://idiodloisdyejk:7bf262014b72ca4b73ee588d0fef98399ff2347e3a82565923ed605ae9e949fd@ec2-44-194-183-115.compute-1.amazonaws.com:5432/d5vbibgi9faqdb"
