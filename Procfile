@@ -1,2 +1,2 @@
 
-web: gunicorn thientube.asgi:application -k uvicorn.workers.UvicornWorker
+web: gunicorn thientube.wsgi:application -k uvicorn.workers.UvicornWorker
