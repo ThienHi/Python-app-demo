@@ -126,3 +126,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+###----------SENTRY-------------------
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+sentry_sdk.init(
+    dsn="http://8b30238dc0be4d108493733b037ea68a@172.27.228.224:9000/11",
+    integrations=[DjangoIntegration()],
+    
+    traces_sample_rate=1.0,
+
+    send_default_pii=True
+)
+
+###---------------------------------------

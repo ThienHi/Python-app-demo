@@ -3,12 +3,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: url(https://img5.thuthuatphanmem.vn/uploads/2021/08/25/background-3d-4k_085529380.jpg);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        input[type=text], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            resize: vertical;
+        }
+
+        input[type=submit] {
+            background-color: #04AA6D;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        .containers {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 10px;
+        }
+
+        .column {
+            float: left;
+            width: 50%;
+            margin-top: 6px;
+            padding: 20px;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        @media screen and (max-width: 600px) {
+            .column, input[type=submit] {
+                width: 100%;
+                margin-top: 0;
+            }
+        }
+
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Create Video</title>
 </head>
 <body>
-    <form action="{% url 'menu:save' %}" method="post">
+    {% comment %} <form action="{% url 'menu:save' %}" method="post">
         {% csrf_token %}
         <h4>Url video</h4>
         {{v.url}}
@@ -19,7 +77,34 @@
         {{v.creator}}
         <br>
         <button type="submit">Create Video</button>
-    </form>
+    </form> {% endcomment %}
+
+    <div class="containers">
+    <div style="text-align:center">
+        <h2>Create Video</h2>
+    </div>
+    <div class="row">
+        <div class="column">
+        <img src="https://mondaycareer.com/wp-content/uploads/2020/11/background-%C4%91%E1%BA%B9p-3-1024x682.jpg" style="width:100%">
+        </div>
+        <div class="column">
+        <form action="{% url 'menu:save' %}" method="post">
+            {% csrf_token %}
+            <label for="fname">Url video</label>
+                {{v.url}}
+            <label for="lname">Image</label>
+                {{v.image}}
+            <label for="country">Content</label>
+                {{v.content}}
+            <label for="subject">Creator</label>
+                {{v.creator}}
+            <input type="submit" value="Create Video">
+        </form>
+        </div>
+    </div>
+    </div>
+
+
 </body>
 </html>
 {% endblock %}

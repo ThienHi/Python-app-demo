@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'menus/static.css' %}" />
     <title>ThienTube</title>
+    <style>
+        body {
+            background-image: url(https://img5.thuthuatphanmem.vn/uploads/2021/08/25/background-3d-4k_085529380.jpg);
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -41,15 +46,22 @@
                 </a>
             </div>
         </div>
-        <div class="menu">
-            <a href="{% url 'menu:home' %}"><button class="menu-button">Trang chủ</button></a>
-            <a href="{% url 'menu:create' %}"><button class="menu-button">Thêm video</button></a>
-            <a href="#"><button class="menu-button">Thịnh hành</button></a>
-            <a href="#"><button class="menu-button">Kênh đăng ký</button></a>
-            <a href="#"><button class="menu-button">Thư viện</button></a>
-            <a href="#"><button class="menu-button">Video đã lưu</button></a>
-            <a href="#"><button class="menu-button">Cài đặt</button></a>
-            <a href="#"><button class="menu-button">Hỗ trợ</button></a>
+        <div class="menu" style="background-image: url(https://img5.thuthuatphanmem.vn/uploads/2021/08/25/background-3d-4k_085529380.jpg);">
+            <a href="{% url 'menu:home' %}"><button class="menu-button" style="background-image: url(https://sackim.com/wp-content/uploads/2020/01/13-1.jpg);"><h3>Trang chủ</h3></button></a>
+            
+            <a href="{% url 'menu:create' %}"><button class="menu-button" style="background-image: url(https://img.freepik.com/free-vector/pink-purple-triangles-wallpaper_23-2148384587.jpg?size=626&ext=jpg);"><h3>Thêm video</h3></button></a>
+            
+            <a href="{% url 'menu:home' %}"><button class="menu-button" style="background-image: url(https://sackim.com/wp-content/uploads/2020/01/13-1.jpg);"><h3>Thịnh hành</h3></button></a>
+            
+            <a href="{% url 'menu:home' %}"><button class="menu-button" style="background-image: url(https://img.freepik.com/free-vector/pink-purple-triangles-wallpaper_23-2148384587.jpg?size=626&ext=jpg);"><h3>Kênh đăng ký</h3></button></a>
+            
+            <a href="{% url 'menu:home' %}"><button class="menu-button" style="background-image: url(https://sackim.com/wp-content/uploads/2020/01/13-1.jpg);"><h3>Thư viện</h3></button></a>
+            
+            <a href="{% url 'menu:home' %}"><button class="menu-button" style="background-image: url(https://img.freepik.com/free-vector/pink-purple-triangles-wallpaper_23-2148384587.jpg?size=626&ext=jpg);"><h3>Video đã lưu</h3></button></a>
+            
+            <a href="{% url 'menu:home' %}"><button class="menu-button" style="background-image: url(https://sackim.com/wp-content/uploads/2020/01/13-1.jpg);"><h3>Cài đặt</h3></button></a>
+            
+            <a href="{% url 'menu:home' %}"><button class="menu-button" style="background-image: url(https://img.freepik.com/free-vector/pink-purple-triangles-wallpaper_23-2148384587.jpg?size=626&ext=jpg);"><h3>Hỗ trợ/h3></button></a>
         </div>
     </div>
     
