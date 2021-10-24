@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'thientube.urls'
@@ -131,18 +132,20 @@ STATIC_URL = '/static/'
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # ###----------SENTRY-------------------
-# import sentry_sdk
-# from sentry_sdk.integrations.django import DjangoIntegration
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
-# sentry_sdk.init(
-#     dsn="http://8b30238dc0be4d108493733b037ea68a@172.27.228.224:9000/11",
-#     integrations=[DjangoIntegration()],
+sentry_sdk.init(
+    dsn="http://8b30238dc0be4d108493733b037ea68a@172.27.228.224:9000/11",
+    integrations=[DjangoIntegration()],
     
-#     traces_sample_rate=1.0,
+    traces_sample_rate=0.2,
+    send_default_pii=True,
 
-#     send_default_pii=True
-# )
+)
 
 # ###---------------------------------------
