@@ -88,7 +88,7 @@ jobs:
     steps:
       - name: deploy on staging heroku master
         run: |
-            echo "THienhi test"
+            echo "THienhi test ${github_token}"
             git config --global user.name $user_name
             git config --global user.email $user_email
             git remote set-url origin https://${github_token}@github.com/${repository}
