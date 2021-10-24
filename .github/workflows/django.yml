@@ -74,7 +74,7 @@ jobs:
         run: |
           curl --request POST \
           --url https://api.github.com/repos/${{ github.repository }}/issues \
-          --header 'authorization: Bearer ${{ secrets.SECRET_GITHUB }}' \
+          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
           --header 'content-type: application/json' \
           --data '{
             "title": "Automated issue for commit: ${{ github.sha }}",
@@ -91,7 +91,7 @@ jobs:
             echo "THienhi test ${github_token} --- ${user_name} --- ${{ secrets.GITHUB_TOKEN }} --- ${repository} --- ${{secrets.GITHUB_TOKEN}}"
             git config --global user.name $user_name
             git config --global user.email $user_email
-            git remote set-url origin https://$${github_token}@github.com/${repository}
+            git remote set-url origin https://${github_token}@github.com/${repository}
         env:
           user_name: "github-actions[bot]"
           user_email: "github-actions[bot]@users.noreply.github.com"
