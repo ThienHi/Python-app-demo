@@ -91,12 +91,8 @@ jobs:
             echo "THienhi test ${github_token} --- ${user_name} --- ${{ secrets.GITHUB_TOKEN }} --- ${repository} --- ${{secrets.GITHUB_TOKEN}}"
             git config --global user.name $user_name
             git config --global user.email $user_email
-            curl --request POST \
-            --url https://api.github.com/${{ github.repository }} \
-            --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
-            --header 'content-type: application/json' \
             # git remote set-url origin https://${github_token}@github.com/${repository}
-            git push origin master
+            # git push origin master
             echo "PUSH OKE-------------------"
         env:
           user_name: "github-actions[bot]"
