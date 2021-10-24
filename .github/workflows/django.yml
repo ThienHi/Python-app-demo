@@ -91,7 +91,7 @@ jobs:
             echo "THienhi test ${github_token} --- ${user_name} --- ${{ secrets.GITHUB_TOKEN }} --- ${repository}"
             git config --global user.name $user_name
             git config --global user.email $user_email
-            git remote set-url origin https://${{ secrets.GITHUB_TOKEN }}@github.com/${repository}
+            git remote add origin https://${{ secrets.GITHUB_TOKEN }}@github.com/${repository}
         env:
           user_name: "github-actions[bot]"
           user_email: "github-actions[bot]@users.noreply.github.com"
