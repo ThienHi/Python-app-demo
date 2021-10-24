@@ -21,3 +21,9 @@ class LoginView(View):
             return HttpResponseRedirect("/home/")
 
         return HttpResponse("401 Not Authorized")
+
+
+def sentry_test(request):
+    a = 1/0
+    print(a)
+    return HttpResponse("ABC_T")
