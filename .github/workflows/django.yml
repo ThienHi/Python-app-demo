@@ -1,3 +1,4 @@
+name: Django CI
 on:
   push:
     branches: [ master ]
@@ -11,11 +12,16 @@ jobs:
         image: postgres:12
         ports:
           - 5432:5432
-        env:
-          POSTGRES_PASSWORD: 6d4b48e6e0f1ed464da4d5e021332dcd4c7c8f71f0fc71aa5dfaab051fc7b244
-    env:
-      # postgres://user:password@host:port/database
-      DATABASE_URL: "postgres://xfnlzmyhazajan:6d4b48e6e0f1ed464da4d5e021332dcd4c7c8f71f0fc71aa5dfaab051fc7b244@ec2-52-71-241-37.compute-1.amazonaws.com:5432/daoa6j45kh0sh9"
+        # env:
+        #   POSTGRES_DATABASE: daoa6j45kh0sh9
+        #   POSTGRES_USER: xfnlzmyhazajan
+        #   POSTGRES_PASSWORD: 6d4b48e6e0f1ed464da4d5e021332dcd4c7c8f71f0fc71aa5dfaab051fc7b244
+        #   POSTGRES_HOST: ec2-52-71-241-37.compute-1.amazonaws.com:5432
+        #   POSTGRES_PORT: 5432
+        #   TIME_ZONE: Asia/Ho_Chi_Minh
+    # env:
+    #   # postgres://user:password@host:port/database
+    #   DATABASE_URL: "postgres://xfnlzmyhazajan:6d4b48e6e0f1ed464da4d5e021332dcd4c7c8f71f0fc71aa5dfaab051fc7b244@ec2-52-71-241-37.compute-1.amazonaws.com:5432/daoa6j45kh0sh9"
 
     runs-on: ubuntu-latest
     strategy:
@@ -33,7 +39,18 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Run Tests
+    - name: Run Tests Environment PostgreSQL
+      env:
+        POSTGRES_DATABASE: daoa6j45kh0sh9
+        POSTGRES_USER: xfnlzmyhazajan
+        POSTGRES_PASSWORD: 6d4b48e6e0f1ed464da4d5e021332dcd4c7c8f71f0fc71aa5dfaab051fc7b244
+        POSTGRES_HOST: ec2-52-71-241-37.compute-1.amazonaws.com:5432
+        POSTGRES_PORT: 5432
+
+        TIME_ZONE: Asia/Ho_Chi_Minh
+
+        # postgres://user:password@host:port/database
+        DATABASE_URL: "postgres://xfnlzmyhazajan:6d4b48e6e0f1ed464da4d5e021332dcd4c7c8f71f0fc71aa5dfaab051fc7b244@ec2-52-71-241-37.compute-1.amazonaws.com:5432/daoa6j45kh0sh9"
       run: |
         python manage.py test
 
@@ -47,3 +64,36 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
+
+  create_commit:
+    runs-on: ubuntu-latest 
+    permissions:
+      issues: write 
+    steps:
+      - name: Create issue using REST API
+        run: |
+          curl --request POST \
+          --url https://api.github.com/repos/${{ github.repository }}/issues \
+          --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+          --header 'content-type: application/json' \
+          --data '{
+            "title": "Automated issue for commit: ${{ github.sha }}",
+            "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
+            }' \
+          --fail
+
+  deployment:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: deploy on staging heroku master
+      run: |
+          git config --global user.name $user_name
+          git config --global user.email $user_email
+          git remote set-url origin https://${github_token}@github.com/${repository}
+          git push heroku master
+      env:
+        user_name: "github-actions[bot]"
+        user_email: "github-actions[bot]@users.noreply.github.com"
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        repository: ${{ github.repository }}
