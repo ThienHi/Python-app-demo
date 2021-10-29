@@ -66,7 +66,7 @@ jobs:
           python-version: 3.9
 
   create_commit:
-    needs: linter
+    needs: [linter, one]
     runs-on: ubuntu-latest 
     permissions:
       issues: write 
@@ -100,19 +100,6 @@ jobs:
           user_email: "github-actions[bot]@users.noreply.github.com"
           github_token: ${{ secrets.SECRET_GITHUB }}
           repository: ${{ github.repository }}
-
-  weekday_job:
-    runs-on: ubuntu-latest
-    env:
-      DAY_OF_WEEK: Mon
-    steps:
-      - name: "Hello world when it's Monday"
-        if: ${{ env.DAY_OF_WEEK == 'Mon' }}
-        run: echo "Hello $FIRST_NAME $middle_name $Last_Name, today is Monday!"
-        env:
-          FIRST_NAME: Mona
-          middle_name: The
-          Last_Name: Octocat
 
   one:
     runs-on: ubuntu-latest
