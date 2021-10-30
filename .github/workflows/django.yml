@@ -20,7 +20,6 @@ jobs:
           POSTGRES_PORT: 5432
           TIME_ZONE: Asia/Ho_Chi_Minh
     env:
-      # postgres://user:password@host:port/database
       DATABASE_URL: "postgres://xfnlzmyhazajan:6d4b48e6e0f1ed464da4d5e021332dcd4c7c8f71f0fc71aa5dfaab051fc7b244@ec2-52-71-241-37.compute-1.amazonaws.com:5432/daoa6j45kh0sh9"
 
     runs-on: ubuntu-latest
