@@ -1,9 +1,9 @@
 name: Django CI
 on:
   push:
-    branches: [ master ]
+    branches: [ dev ]
   pull_request:
-    branches: [ master ]
+    branches: [ dev ]
   
 jobs:
   build:
@@ -12,16 +12,15 @@ jobs:
         image: postgres:12
         ports:
           - 5432:5432
-        # env:
-        #   POSTGRES_DATABASE: daoa6j45kh0sh9
-        #   POSTGRES_USER: xfnlzmyhazajan
-        #   POSTGRES_PASSWORD: 6d4b48e6e0f1ed464da4d5e021332dcd4c7c8f71f0fc71aa5dfaab051fc7b244
-        #   POSTGRES_HOST: ec2-52-71-241-37.compute-1.amazonaws.com:5432
-        #   POSTGRES_PORT: 5432
-        #   TIME_ZONE: Asia/Ho_Chi_Minh
-    # env:
-    #   # postgres://user:password@host:port/database
-    #   DATABASE_URL: "postgres://xfnlzmyhazajan:6d4b48e6e0f1ed464da4d5e021332dcd4c7c8f71f0fc71aa5dfaab051fc7b244@ec2-52-71-241-37.compute-1.amazonaws.com:5432/daoa6j45kh0sh9"
+        env:
+          POSTGRES_DATABASE: daoa6j45kh0sh9
+          POSTGRES_USER: xfnlzmyhazajan
+          POSTGRES_PASSWORD: 6d4b48e6e0f1ed464da4d5e021332dcd4c7c8f71f0fc71aa5dfaab051fc7b244
+          POSTGRES_HOST: ec2-52-71-241-37.compute-1.amazonaws.com:5432
+          POSTGRES_PORT: 5432
+          TIME_ZONE: Asia/Ho_Chi_Minh
+    env:
+      DATABASE_URL: "postgres://xfnlzmyhazajan:6d4b48e6e0f1ed464da4d5e021332dcd4c7c8f71f0fc71aa5dfaab051fc7b244@ec2-52-71-241-37.compute-1.amazonaws.com:5432/daoa6j45kh0sh9"
 
     runs-on: ubuntu-latest
     strategy:
@@ -39,20 +38,20 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Run Tests Environment PostgreSQL
-      env:
-        POSTGRES_DATABASE: daoa6j45kh0sh9
-        POSTGRES_USER: xfnlzmyhazajan
-        POSTGRES_PASSWORD: 6d4b48e6e0f1ed464da4d5e021332dcd4c7c8f71f0fc71aa5dfaab051fc7b244
-        POSTGRES_HOST: ec2-52-71-241-37.compute-1.amazonaws.com:5432
-        POSTGRES_PORT: 5432
-
-        TIME_ZONE: Asia/Ho_Chi_Minh
-
-        # postgres://user:password@host:port/database
-        DATABASE_URL: "postgres://xfnlzmyhazajan:6d4b48e6e0f1ed464da4d5e021332dcd4c7c8f71f0fc71aa5dfaab051fc7b244@ec2-52-71-241-37.compute-1.amazonaws.com:5432/daoa6j45kh0sh9"
+    - name: Run Tests Environment
       run: |
         python manage.py test
+      # env:
+      #   POSTGRES_DATABASE: daoa6j45kh0sh9
+      #   POSTGRES_USER: xfnlzmyhazajan
+      #   POSTGRES_PASSWORD: 6d4b48e6e0f1ed464da4d5e021332dcd4c7c8f71f0fc71aa5dfaab051fc7b244
+      #   POSTGRES_HOST: ec2-52-71-241-37.compute-1.amazonaws.com:5432
+      #   POSTGRES_PORT: 5432
+
+      #   TIME_ZONE: Asia/Ho_Chi_Minh
+      # 
+      #   # postgres://user:password@host:port/database
+      #   DATABASE_URL: "postgres://xfnlzmyhazajan:6d4b48e6e0f1ed464da4d5e021332dcd4c7c8f71f0fc71aa5dfaab051fc7b244@ec2-52-71-241-37.compute-1.amazonaws.com:5432/daoa6j45kh0sh9"
 
   linter:
     runs-on: ubuntu-latest
@@ -66,7 +65,7 @@ jobs:
           python-version: 3.9
 
   create_commit:
-    needs: linter
+    needs: [linter, one]
     runs-on: ubuntu-latest 
     permissions:
       issues: write 
@@ -100,19 +99,6 @@ jobs:
           user_email: "github-actions[bot]@users.noreply.github.com"
           github_token: ${{ secrets.SECRET_GITHUB }}
           repository: ${{ github.repository }}
-
-  weekday_job:
-    runs-on: ubuntu-latest
-    env:
-      DAY_OF_WEEK: Mon
-    steps:
-      - name: "Hello world when it's Monday"
-        if: ${{ env.DAY_OF_WEEK == 'Mon' }}
-        run: echo "Hello $FIRST_NAME $middle_name $Last_Name, today is Monday!"
-        env:
-          FIRST_NAME: Mona
-          middle_name: The
-          Last_Name: Octocat
 
   one:
     runs-on: ubuntu-latest
